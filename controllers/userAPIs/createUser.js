@@ -1,4 +1,4 @@
-import { User } from '../../schemas/userSchema.js'
+import {User} from '../../schemas/userSchema.js'
 import bcrypt from "bcrypt"
 import {generateOTP} from '../../utils/generateOTP.js'
 import {sendMail} from '../../utils/sendMail.js'
@@ -25,7 +25,7 @@ export const createUser = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, salt)
 
     //save admin
-    if (email === 'samoluwagbemi22@gmail.com' || email === 'name@email.com') {
+    if (email === 'samoluwagbemi22@gmail.com') {
       const newUser = new User ({...req.body, password: hashedPassword, admin: true})
       await newUser.save()
     }
@@ -42,14 +42,14 @@ export const createUser = async (req, res) => {
     //send email to new user
     try {
     const mailObj = {
-      mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+      mailFrom: `Blog ${process.env.EMAIL_USER}`,
       mailTo: email,
-      subject: 'Welcome to Declutter App',
+      subject: 'Welcome to Blog',
       body: `
-        <p>Welcome to the Declutter, <strong>${userName}</Strong> <p>
-        <p>Before you login, we need to verify your account.</p>
+        <p>Welcome to the Blog, <strong>${userName}</Strong> <p>
+        <p>Kindly verify your account to complete your registration.</p>
         <p>Kindly make use of the otp below to verify your account</p>
-        <h1>${otp}</h1>
+        <h2>${otp}</h2>
         `
     }
     const info = await sendMail (mailObj)

@@ -4,14 +4,10 @@ export const userSchema = new mongoose.Schema({
     userName: {type: String, required: true, unique: true},    
     email: {type: String, required: true, unique: true},    
     password: {type: String, required: true, unique: true},
-    admin: {type: Boolean, default: false},
-    ChiefAdmin: {type: Boolean, default: false},  
-   
+    admin: {type: Boolean, default: false},  
     profile: {
       country: {type: String, required: true},
-      number: {type: Number, required: true},
-      address: {type: String, required: true},
-      bio: {type: String, required: true},
+      bio: {type: String, required: false},
     }, 
     otp: String,
     otpExpires: Date,

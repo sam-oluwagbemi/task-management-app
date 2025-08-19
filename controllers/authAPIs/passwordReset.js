@@ -1,7 +1,7 @@
-import { User } from "../../schemas/userSchema.js";
+import {User} from "../../schemas/userSchema.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { sendMail } from "../../utils/sendMail.js";
+import {sendMail} from "../../utils/sendMail.js";
 import Crypto from 'crypto'
 
 export const passwordResetRequest = async (req, res) => {
@@ -21,7 +21,7 @@ export const passwordResetRequest = async (req, res) => {
       await user.save()
 
       await sendMail({
-        mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+        mailFrom: `Blog ${process.env.EMAIL_USER}`,
         mailTo: email,
         subject: 'Reset your Password',
         body: `
@@ -50,7 +50,7 @@ export const passwordReset = async (req, res) => {
     await user.save()
 
      await sendMail({
-        mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+        mailFrom: `Blog ${process.env.EMAIL_USER}`,
         mailTo: user.email,
         subject: 'New Password Created Successfully',
         body: `

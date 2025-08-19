@@ -7,14 +7,14 @@ import {sendMail} from "../../utils/sendMail.js"
 export const login = async (req, res) => {
 const {email, password} = req.body
 
-  //send login confirmation email
+  //login confirmation email
   const mailObj = {
-  mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+  mailFrom: `Blog ${process.env.EMAIL_USER}`,
   mailTo: email,
   subject: 'Login Successful',
   body: `
       <p>You have logged in to your account.<p>
-      <p>You can proceed to post your items for sale</p>
+      <p>You can proceed to create a post</p>
       `
   }
 
@@ -48,7 +48,7 @@ try {
   return res
     .cookie('token', token, {httpOnly: true, sameSite: 'strict'})
     .status(200)
-    .json({message: `Login successful, proceed to create a Product listing`})
+    .json({message: `Login successful, you can now create a post`})
 
   } catch (error) {
   res.status(500).json(error)

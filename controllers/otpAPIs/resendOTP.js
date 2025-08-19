@@ -25,7 +25,7 @@ export const resendOTP = async (req, res) => {
     await user.save()
 
   await  sendMail({
-    mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+    mailFrom: `Blog ${process.env.EMAIL_USER}`,
     mailTo: email,
     subject: 'Verify OTP',
     body: `

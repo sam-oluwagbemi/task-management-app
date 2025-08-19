@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { upload } from "../middlewares/fileUploadMiddleware.js";
+import {Router} from "express";
+import {upload} from "../middlewares/fileUploadMiddleware.js";
 
 export const uploadFileRouter = Router();
 

@@ -1,5 +1,5 @@
-import { User } from "../../schemas/userSchema.js";
-import { sendMail } from "../../utils/sendMail.js";
+import {User} from "../../schemas/userSchema.js"
+import {sendMail} from "../../utils/sendMail.js"
 
 export const verifyOTP = async (req, res) => {
   const {otp, email} = req.body
@@ -24,12 +24,12 @@ export const verifyOTP = async (req, res) => {
 
     await user.save()
     await  sendMail({
-      mailFrom: `Declutter ${process.env.EMAIL_USER}`,
+      mailFrom: `Blog ${process.env.EMAIL_USER}`,
       mailTo: email,
       subject: 'Account Verification Successful',
       body: `
       <p> Dear ${user.userName}, your account has been verified successfully. </p>
-      <p> You may login and post your items for sale </p>
+      <p> You may login and create a post </p>
       `
     })
     

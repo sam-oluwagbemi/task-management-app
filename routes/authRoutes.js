@@ -1,6 +1,6 @@
-import Router from 'router'
+import {Router} from "express"
 import {login} from "../controllers/authAPIs/authController.js"
-import { passwordReset, passwordResetRequest } from '../controllers/authAPIs/passwordReset.js'
+import {passwordReset, passwordResetRequest} from '../controllers/authAPIs/passwordReset.js'
 
 export const authRouter = Router()
 authRouter

@@ -20,18 +20,17 @@ export const editUser = async (req, res) => {
 export const editProfile = async (req, res) => {
   const {id} = req.params
   const reqId = req.user._id
-  const {Country, Number, Address, Bio} = req.body
+  const {country, bio} = req.body
+
   if (id.toString() === reqId.toString()) {
     try {
-     await User.findByIdAndUpdate(id, {
+     const updatedUser = await User.findByIdAndUpdate(id, {
       $set: {
-      'profile.Country': Country,
-      'profile.Number': Number,
-      'profile.Address': Address,
-      'profile.Bio': Bio,
+      'profile.country': country,
+      'profile.bio': bio,
       }
     }, {new: true})
-    res.status(200).json({message: "Profile updated sucessfully!"})
+    res.status(200).json(updatedUser)
     } 
     catch (error) {
     res.status(500).json(error)
