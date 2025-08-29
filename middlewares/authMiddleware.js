@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { User } from "../schemas/userSchema.js" 
+import {User} from "../schemas/userSchema.js" 
 
 export const authMiddleware = async (req, res, next) => {
   const accessToken = req.cookies.token
@@ -21,9 +21,7 @@ export const authMiddleware = async (req, res, next) => {
   }
   req.user = verifiedUser
   next()
-  }
-
-  catch (error) {
-    return res.status(500).json(error)
+  } catch (error) {
+    return res.status(500).json({error})
   }
 }

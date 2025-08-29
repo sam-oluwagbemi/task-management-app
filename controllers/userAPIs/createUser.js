@@ -1,4 +1,5 @@
 import {User} from '../../schemas/userSchema.js'
+import {Category} from '../../schemas/categorySchema.js'
 import bcrypt from "bcrypt"
 import {generateOTP} from '../../utils/generateOTP.js'
 import {sendMail} from '../../utils/sendMail.js'
@@ -24,12 +25,6 @@ export const createUser = async (req, res) => {
     const salt = bcrypt.genSaltSync(10) //ENCRYPT PASSWORD
     const hashedPassword = bcrypt.hashSync(password, salt)
 
-    //save admin
-    if (email === 'samoluwagbemi22@gmail.com') {
-      const newUser = new User ({...req.body, password: hashedPassword, admin: true})
-      await newUser.save()
-    }
-    
     //save new user
     const newUser = new User({
       ...req.body, 
@@ -39,14 +34,22 @@ export const createUser = async (req, res) => {
     })
     await newUser.save()
 
+    const defaultCategories = ["My Tasks"];
+    const categoryDocs = defaultCategories.map(name => ({
+      name,
+      user: newUser._id,
+      Default: true
+    }));
+    await Category.insertMany(categoryDocs) 
+
     //send email to new user
     try {
     const mailObj = {
-      mailFrom: `Blog ${process.env.EMAIL_USER}`,
+      mailFrom: `Tasks App ${process.env.EMAIL_USER}`,
       mailTo: email,
-      subject: 'Welcome to Blog',
+      subject: 'Welcome to Tasks App',
       body: `
-        <p>Welcome to the Blog, <strong>${userName}</Strong> <p>
+        <p>Welcome to the Tasks App, <strong>${userName}</Strong> <p>
         <p>Kindly verify your account to complete your registration.</p>
         <p>Kindly make use of the otp below to verify your account</p>
         <h2>${otp}</h2>

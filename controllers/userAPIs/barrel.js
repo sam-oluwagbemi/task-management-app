@@ -1,5 +1,4 @@
-export * from './createUser.js'
+export {createUser} from './createUser.js'
 export {getAllUsers, getAUser, getByqueryParams} from './readUser.js'
-export {editProfile, editUser} from './updateUser.js'
-export * from './deleteUser.js'
-// export * from './makeAdmin.js'
+export {editUser} from './updateUser.js'
+export {deleteUser} from './deleteUser.js'

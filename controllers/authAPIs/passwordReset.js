@@ -21,7 +21,7 @@ export const passwordResetRequest = async (req, res) => {
       await user.save()
 
       await sendMail({
-        mailFrom: `Blog ${process.env.EMAIL_USER}`,
+        mailFrom: `Tasks App ${process.env.EMAIL_USER}`,
         mailTo: email,
         subject: 'Reset your Password',
         body: `
@@ -50,7 +50,7 @@ export const passwordReset = async (req, res) => {
     await user.save()
 
      await sendMail({
-        mailFrom: `Blog ${process.env.EMAIL_USER}`,
+        mailFrom: `Tasks App ${process.env.EMAIL_USER}`,
         mailTo: user.email,
         subject: 'New Password Created Successfully',
         body: `

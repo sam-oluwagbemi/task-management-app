@@ -9,19 +9,19 @@ const {email, password} = req.body
 
   //login confirmation email
   const mailObj = {
-  mailFrom: `Blog ${process.env.EMAIL_USER}`,
+  mailFrom: `Task App ${process.env.EMAIL_USER}`,
   mailTo: email,
   subject: 'Login Successful',
   body: `
       <p>You have logged in to your account.<p>
-      <p>You can proceed to create a post</p>
+      <p>You may proceed to create and manage your tasks</p>
       `
   }
 
 if (!email || !password) {
   res.status(400).json({message: "Please provide all fields"})
   return
-} 
+}
 else {
 try {
   const user = await User.findOne({email})
@@ -48,7 +48,7 @@ try {
   return res
     .cookie('token', token, {httpOnly: true, sameSite: 'strict'})
     .status(200)
-    .json({message: `Login successful, you can now create a post`})
+    .json({message: `Login successful, you can now create and manage tasks`})
 
   } catch (error) {
   res.status(500).json(error)

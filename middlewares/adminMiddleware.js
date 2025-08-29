@@ -1,10 +1,7 @@
-// import { User } from "../schemas/userSchema.js" 
+export const adminMiddleware = async (req, res, next) => {
 
-// export const adminCheck = async (req, res, next) => {
-//   const newUserser = req.user
-//   if (user.admin === true) {
-//     next
-//   } else {
-//    res.status(401).json({message: "You are not authorized to access this route"}) 
-//   }
-// }
+  if(!req.user.admin) {
+    return res.status(403).json({message: "Access denied. Admins only"})
+  }
+  next()
+}

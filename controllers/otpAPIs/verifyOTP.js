@@ -24,12 +24,12 @@ export const verifyOTP = async (req, res) => {
 
     await user.save()
     await  sendMail({
-      mailFrom: `Blog ${process.env.EMAIL_USER}`,
+      mailFrom: `Tasks App ${process.env.EMAIL_USER}`,
       mailTo: email,
       subject: 'Account Verification Successful',
       body: `
       <p> Dear ${user.userName}, your account has been verified successfully. </p>
-      <p> You may login and create a post </p>
+      <p> You may login and manage your tasks </p>
       `
     })
     
